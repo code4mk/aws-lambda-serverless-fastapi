@@ -1,21 +1,22 @@
-org: kintaro
-app: demo-app-api
-service: demo-app-api
+org: code4mk
+app: demo-app-api-fastapi
+service: demo-app-api-fastapi
 
 frameworkVersion: '3'
 
 plugins:
   - serverless-python-requirements
+  - serverless-wsgi
 provider:
   name: aws
-  runtime: python3.9
-  region: us-west-2
+  runtime: python3.11
+  region: us-east-1
 
 functions:
   demo_app_fastapi:
-    handler: lambda_handler.handler
+    handler: lamda_handler.handler
     events:
       - http:
           path: /{proxy+}
           method: any
-  
+
