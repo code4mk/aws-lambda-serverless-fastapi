@@ -28,7 +28,8 @@ jobs:
     - name: Serverless deploy
       uses: serverless/github-action@master
       with:
-        args: deploy
+        args: -c "serverless plugin install --name serverless-python-requirements && serverless deploy"
+        entrypoint: /bin/sh
       env:
         # To link with your Serverless Framework account, equivalent to login
         SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
