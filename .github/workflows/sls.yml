@@ -29,8 +29,8 @@ jobs:
       with:
         python-version: '3.9'
 
-    - name: Install Serverless Framework globally
-      run: npm install -g serverless
+    - name: Install Serverless Framework v3.38.0 globally
+      run: npm install -g serverless@3.38.0
 
     - name: Install serverless-python-requirements globally
       run: serverless plugin install --name serverless-python-requirements
