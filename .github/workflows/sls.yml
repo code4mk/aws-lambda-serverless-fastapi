@@ -14,21 +14,30 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [18.20.3]
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+
+    - name: Set up Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
     - run: npm ci
 
-    # Deployment of your project
+    # Ensure Serverless plugin for Python requirements is installed and deploy
     - name: Serverless deploy
       uses: serverless/github-action@master
       with:
-        args: -c "serverless plugin install --name serverless-python-requirements && serverless deploy"
+        args: >
+          -c "serverless plugin install --name serverless-python-requirements
+          && serverless deploy"
         entrypoint: /bin/sh
       env:
         # To link with your Serverless Framework account, equivalent to login
