@@ -18,7 +18,7 @@ async def create_order(request: Request, the_data: UserCreateSchema):
     output = user_service.s_create_user(data)
     return JSONResponse(content=output, status_code=status.HTTP_200_OK)
 
-@router.get("/users/")
+@router.get("/users/all")
 async def get_users(request: Request):
     data = user_service.s_get_users(request)
     return JSONResponse(content=jsonable_encoder(data), status_code=status.HTTP_200_OK)
