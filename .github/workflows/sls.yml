@@ -29,16 +29,17 @@ jobs:
       with:
         python-version: '3.9'
 
+    - name: Install Serverless Framework globally
+      run: npm install -g serverless
+
+    - name: Install serverless-python-requirements globally
+      run: serverless plugin install --name serverless-python-requirements
+
     - run: npm ci
 
     # Ensure Serverless plugin for Python requirements is installed and deploy
     - name: Serverless deploy
-      uses: serverless/github-action@master
-      with:
-        args: >
-          -c "serverless plugin install --name serverless-python-requirements
-          && serverless deploy"
-        entrypoint: /bin/sh
+      run: serverless deploy
       env:
         # To link with your Serverless Framework account, equivalent to login
         SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
