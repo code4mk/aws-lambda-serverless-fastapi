@@ -1,4 +1,4 @@
-name: Deploy master branch
+name: 🚀 Deploy Serverless (fastapi)
 
 on:
   push:
@@ -12,33 +12,31 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.20.3]
-
     steps:
-    - uses: actions/checkout@v3
+    - name: 📥 Checkout code
+      uses: actions/checkout@v3
 
-    - name: Set up Node.js ${{ matrix.node-version }}
+    - name: 🛠️ Set up Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 18.20.3
 
-    - name: Set up Python 3.9
+    - name: 🐍 Set up Python 3.9
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
 
-    - name: Install Serverless Framework v3.38.0 globally
+    - name: 📦 Install Serverless Framework v3.38.0 globally
       run: npm install -g serverless@3.38.0
 
-    - name: Install serverless-python-requirements globally
+    - name: 🧩 Install serverless-python-requirements globally
       run: serverless plugin install --name serverless-python-requirements
 
-    - run: npm ci
+    - name: 📦 Install Node.js dependencies
+      run: npm ci
 
     # Ensure Serverless plugin for Python requirements is installed and deploy
-    - name: Serverless deploy
+    - name: 🚀 Serverless deploy
       run: serverless deploy
       env:
         # To link with your Serverless Framework account, equivalent to login
