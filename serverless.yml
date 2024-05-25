@@ -1,0 +1,21 @@
+org: kintaro
+app: demo-app-api
+service: demo-app-api
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-python-requirements
+provider:
+  name: aws
+  runtime: python3.9
+  region: us-west-2
+
+functions:
+  demo_app_fastapi:
+    handler: lambda_handler.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
+  

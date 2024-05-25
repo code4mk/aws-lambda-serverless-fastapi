@@ -1,0 +1,5 @@
+fastapi
+python-dotenv
+sqlalchemy
+psycopg2-binary
+mangum
