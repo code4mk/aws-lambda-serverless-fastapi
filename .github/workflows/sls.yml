@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
     # This allows the workflow to be manually triggered
 
@@ -17,10 +17,9 @@ jobs:
 
       # Deployment of your project
       - name: serverless deploy
-        uses: suprgames/serverless-github-action@v1.77
+        uses: serverless/github-action@master
         with:
-          command: deploy
-          args: -v
+          args: deploy
         env:
           # To link with your Serverless Framework account, equivalent to login
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
