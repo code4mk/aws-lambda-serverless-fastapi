@@ -15,7 +15,8 @@ functions:
   demo_app_fastapi:
     handler: lamda_handler.handler
     events:
-      - http:
-          path: "*"
-          method: any
+      - httpApi: "*"
+      # - http:
+      #     path: "*"
+      #     method: any
 
