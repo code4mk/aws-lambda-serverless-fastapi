@@ -16,6 +16,6 @@ functions:
     handler: lamda_handler.handler
     events:
       - http:
-          path: /{proxy+}
+          path: "*"
           method: any
 
