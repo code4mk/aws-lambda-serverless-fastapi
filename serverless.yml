@@ -6,7 +6,6 @@ frameworkVersion: '3'
 
 plugins:
   - serverless-python-requirements
-  - serverless-wsgi
 provider:
   name: aws
   runtime: python3.11
