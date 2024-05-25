@@ -138,3 +138,4 @@ __azurite_db*__.json
 # Serverless directories
 .serverless
 node_modules
+aws_lambda_fastapi_venv
