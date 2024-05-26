@@ -19,3 +19,14 @@ functions:
           path: /{proxy+}
           method: any
 
+custom:
+  pythonRequirements:
+      useStaticCache: false
+      useDownloadCache: false
+      pipCmdExtraArgs:
+        - "--platform manylinux2014_x86_64"
+        - "--implementation cp" 
+        - "--python-version 3.9"
+        - "--only-binary=:all:"
+        - "--upgrade"
+
