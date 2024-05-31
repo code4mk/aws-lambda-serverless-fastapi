@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, Request
 from fastapi.responses import JSONResponse
 
-# Create a FastAPI app
+# Create a api router
 router = APIRouter()
 
 # root index

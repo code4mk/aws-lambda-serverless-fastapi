@@ -24,6 +24,9 @@ pip3 install -r requirements.txt
 
 # run project with uvicorn
 uvicorn "fastapi_project.main:app" --reload --port=8000
+
+# or, run bash with shell
+./run_fastapi_project.sh
 ```
 
 # deploy on production
@@ -33,11 +36,12 @@ uvicorn "fastapi_project.main:app" --reload --port=8000
 set secrets `SERVERLESS_ACCESS_KEY` , `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
 
 ## serverless
-* set your data
+
+* set your own data
 
 ```bash
 # serverless.yml
-org: code4mk
+org: ****
 app: demo-app-api-fastapi
 service: demo-app-api-fastapi
 ```
@@ -49,4 +53,9 @@ service: demo-app-api-fastapi
 ```
 
 
+# project route
 
+```bash
+http://localhost:8000/api/v1/users
+http://localhost:8000/health
+```
