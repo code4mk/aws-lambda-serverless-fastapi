@@ -7,7 +7,7 @@ Deploy fastapi on aws lambda with serverless
 
 # local development (fastapi)
 
-## env
+## python virtual env
 ```bash
 # create virtual environment
 python3 -m venv .aws_lambda_fastapi_venv
