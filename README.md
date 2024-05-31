@@ -33,7 +33,9 @@ uvicorn "fastapi_project.main:app" --reload --port=8000
 
 ## github action 
 
-set secrets `SERVERLESS_ACCESS_KEY` , `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
+* set secrets `SERVERLESS_ACCESS_KEY` , `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
+
+NB: you can set environment variable `DATABASE_URL` and `LOAD_SQL_PROJECT` on lamda configuration (Environment variables). LOAD_SQL_PROJECT value will be `yes` 
 
 ## serverless
 
