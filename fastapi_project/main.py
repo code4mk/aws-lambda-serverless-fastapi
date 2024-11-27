@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_project.api import health, root_index
+from fastapi_project.utils.validation import setup_validation_exception_handler
 
 # Load .env file
 load_dotenv()
@@ -13,6 +14,7 @@ load_sql_project = os.getenv('LOAD_SQL_PROJECT', 'false').lower() in ('true', '1
 
 def create_application():
     application = FastAPI()
+    setup_validation_exception_handler(application)
     
     # Include the root index and health router
     application.include_router(root_index.router)

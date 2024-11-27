@@ -4,13 +4,14 @@ from fastapi.encoders import jsonable_encoder
 from fastapi_project.utils.base import the_query
 from fastapi_project.services.user_service import UserService
 from fastapi_project.schemas.user_schema import UserCreateSchema
-
+from fastapi_project.utils.validation import dto
 router = APIRouter()
 
 user_service = UserService()
 
 @router.post("/users/create")
-async def create_order(request: Request, the_data: UserCreateSchema):
+@dto(UserCreateSchema)
+async def create_order(request: Request):
     # Retrieve data from the request
     request_data = await the_query(request)
     data = UserCreateSchema(**request_data)
