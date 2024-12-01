@@ -16,7 +16,10 @@ async def create_order(request: Request):
     request_data = await the_query(request)
     data = UserCreateSchema(**request_data)
     
-    output = user_service.s_create_user(data)
+    # validated_data = request.state.validated_data
+    # output = user_service.s_create_user(request, validated_data)
+    
+    output = user_service.s_create_user(request, data)
     return JSONResponse(content=output, status_code=status.HTTP_200_OK)
 
 @router.get("/users")

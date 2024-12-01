@@ -27,7 +27,11 @@ def dto(schema: BaseModel):
             try:
                 request_data = await the_query(request)
                 validated_data = schema(**request_data)
-                return await func(validated_data, *args, **kwargs)
+                
+                # Attach validated data to request object
+                request.state.validated_data = validated_data
+                
+                return await func(request, *args, **kwargs)
             except ValidationError as e:
                 errors = {}
                 for error in e.errors():

@@ -1,10 +1,8 @@
-from fastapi import Request, HTTPException
+from fastapi import Request
 from typing import Any, Dict, Optional, Union
 from pydantic import BaseModel, ValidationError
 from sqlalchemy import desc
 from urllib.parse import urlparse
-from fastapi.responses import JSONResponse
-from fastapi import FastAPI
 
 async def the_query(request: Request, name = None) -> Dict[str, str]:
     data = {}
@@ -23,22 +21,17 @@ async def the_query(request: Request, name = None) -> Dict[str, str]:
 
 
 async def validate_data(data: Dict[str, Any], model: BaseModel) -> Dict[str, Union[str, Dict[str, Any]]]:
+    output = {'status': 'valid'}
+    
     try:
         instance = model(**data)
-        return {'success': True, 'data': instance.dict()}
+        output['data'] = instance.dict()
     except ValidationError as e:
-        errors = {}
-        for error in e.errors():
-            field = error['loc'][0]
-            message = field + " " + error['msg'] 
-            if field not in errors:
-                errors[field] = []
-            errors[field].append(message)
-            
-        return {
-            'success': False,
-            'errors': errors["details"]
-        }
+        # If validation fails, return status as invalid and the validation errors
+        output['status'] = 'invalid'
+        output['errors'] = e.errors()
+        
+    return output
 
 
 def the_sorting(request, query):
@@ -104,7 +97,3 @@ def paginate(request: Request, query, serilizer, the_page: int = 1, the_per_page
         'to': offset + len(data) if data else None,
         wrap: data
     }
-
-
-# Update the __all__ list
-__all__ = []

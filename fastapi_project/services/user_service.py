@@ -1,4 +1,4 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, Request
 from fastapi_project.database.database import SessionLocal
 from fastapi_project.utils.base import the_sorting, paginate
 from fastapi_project.models.users import User
@@ -9,7 +9,8 @@ class UserService:
     def __init__(self):
         self.db = SessionLocal()
         
-    def s_create_user(self, user: UserCreateSchema):
+    def s_create_user(self, request: Request, user: UserCreateSchema):
+        
         db_user = self.db.query(User).filter(User.email == user.email).first()
         if db_user:
             raise HTTPException(status_code=400, detail="Email already registered")
@@ -19,7 +20,7 @@ class UserService:
         self.db.refresh(new_user)
         return new_user
       
-    def s_get_users(self, request):
+    def s_get_users(self, request: Request):
         users = self.db.query(User)
         users = the_sorting(request, users)
         return paginate(request, users, serilizer=UserSerializer, wrap='users')
